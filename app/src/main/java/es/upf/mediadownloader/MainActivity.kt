@@ -64,7 +64,7 @@ class MainActivity : Activity() {
         urlInput = EditText(this).apply {
             hint = "Pega aquí una URL de vídeo..."
             textSize = 15f
-            singleLine = false
+            setSingleLine(false)
             minLines = 2
             maxLines = 3
             setPadding(dp(14), dp(12), dp(14), dp(12))
