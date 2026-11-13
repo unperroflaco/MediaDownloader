@@ -140,7 +140,7 @@ class MainActivity : Activity() {
         address = EditText(this).apply {
             hint = "Dirección o búsqueda"
             textSize = 14f
-            singleLine = true
+            setSingleLine(true)
             inputType = android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_VARIATION_URI
             imeOptions = android.view.inputmethod.EditorInfo.IME_ACTION_GO
             setPadding(dp(8), dp(5), dp(8), dp(5))
