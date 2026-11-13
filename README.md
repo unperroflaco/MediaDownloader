@@ -1,23 +1,30 @@
 # MediaDownloader Android
 
-Primera base del proyecto Android, sin servidor externo.
+Aplicación Android nativa en Kotlin.
 
-## Funcionalidad de esta versión
+## Versión 0.2.0
 
-- Interfaz Android nativa en Kotlin.
-- Pegado de enlaces desde el portapapeles.
-- Descarga de URL directas HTTP/HTTPS mediante Android DownloadManager.
-- Guardado en `Movies/MediaDownloader`.
-- Reconocimiento de enlaces de Facebook y aviso de que esta versión no extrae publicaciones ni páginas.
-- Workflow de GitHub Actions para generar el APK de depuración.
+- Navegador integrado basado en Android WebView.
+- Barra de direcciones y búsqueda, atrás, adelante, recargar e inicio.
+- JavaScript y almacenamiento web habilitados para compatibilidad con páginas modernas.
+- Detección de enlaces de Facebook: se abren en Chrome Custom Tabs (o en el navegador predeterminado si Custom Tabs no está disponible), evitando el bloqueo habitual del inicio de sesión en WebView.
+- Descarga de enlaces directos desde el navegador integrado mediante Android DownloadManager.
+- Las descargas se guardan en `Movies/MediaDownloader`.
+- Se conserva la pantalla de descarga directa de versiones anteriores.
+
+## Facebook: qué hace y qué no hace
+
+Facebook se abre en una pestaña segura del navegador del dispositivo. Esto permite iniciar sesión y navegar con la sesión que gestione el navegador. Al cerrar la pestaña se vuelve a MediaDownloader.
+
+Por las restricciones de inicio de sesión de Meta, Facebook no se fuerza dentro del WebView. Los vídeos reproducidos dentro de la pestaña segura de Facebook no se interceptan ni se extraen automáticamente desde MediaDownloader. Si Facebook ofrece una descarga para un contenido propio, utiliza esa opción. El navegador integrado sí puede descargar enlaces directos que una página entregue al WebView.
+
+No se implementan bypass de DRM, acceso a contenido privado ni evasión de restricciones de plataformas.
 
 ## Limitaciones conocidas
 
-- Esta versión inicial descarga URL directas; no extrae vídeos desde páginas de Facebook.
-- No implementa bypass de DRM, autenticación, contenido privado ni restricciones de plataformas.
-- La selección de 720p/480p/360p aparece deshabilitada: la descarga directa conserva la calidad del archivo servido.
-- FFmpeg no está integrado todavía. Se incorporará después de elegir y verificar una distribución Android mantenida, compatible con la licencia y ABI del proyecto.
-- El gestor de descargas de Android requiere que el servidor de origen permita la descarga y entregue un archivo accesible sin sesión privada.
+- Las descargas desde el WebView dependen de que la página exponga una URL descargable normal. Los vídeos servidos mediante segmentos, blobs, DRM o reproductores protegidos no se convierten automáticamente en archivos.
+- La selección de calidad y la conversión FFmpeg siguen pendientes.
+- La autenticación y las cookies de Facebook se gestionan en la pestaña segura del navegador, no se copian ni se extraen hacia el WebView.
 
 ## Compilar
 
